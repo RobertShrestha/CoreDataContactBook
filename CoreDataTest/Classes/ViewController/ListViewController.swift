@@ -13,7 +13,7 @@ class ListViewController: UIViewController {
     var users = [User]()
     var listViewModel = ListViewModel()
     override func viewWillAppear(_ animated: Bool) {
-        
+        //Load the data
         fetchData()
     }
 
@@ -49,6 +49,8 @@ class ListViewController: UIViewController {
     
 }
 extension ListViewController:UITableViewDelegate,UITableViewDataSource{
+    
+    //MARK: - TableView Delegate and Data Source Delegate
     func numberOfSections(in tableView: UITableView) -> Int {
         return listViewModel.listViewNumberOfSection()
     }

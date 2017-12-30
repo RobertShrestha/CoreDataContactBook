@@ -17,6 +17,7 @@ class ListViewModel:NSObject{
     
     //MARK: - Core Data Methods
     
+    //Fetch the Data
     func fetchData(completion:@escaping (String?,Bool,_ error:NSError?)->()){
         do{
             try users = context.fetch(User.fetchRequest())
@@ -25,13 +26,8 @@ class ListViewModel:NSObject{
             completion("",false,error as NSError)
         }
         completion("",true,nil)
-        //locationArray = locationArray.sorted(by: { $0.id < $1.id })
-        //print(locationArray[1].id,locationArray[1].lat,locationArray[1].long)
-//        for user in users{
-//            print(user.name as Any)
-//            
-//        }
     }
+    //Search the data
     func searchData(searchString:String){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         request.predicate = NSPredicate(format: "name == %d",searchString)
@@ -49,12 +45,13 @@ class ListViewModel:NSObject{
         }
         
     }
+    //Delete data
     func deleteData(user:User){
         context.delete(user)
         (UIApplication.shared.delegate as! AppDelegate).saveContext()
         
     }
-    
+    //Delete all data
     func resetAllRecords(in entity : String)
     {
         
@@ -71,7 +68,7 @@ class ListViewModel:NSObject{
             print ("There was an error")
         }
     }
-    
+    //Add data
     func createData(name:String,phone:String){
         let newUser = NSEntityDescription.insertNewObject(forEntityName: "User", into: context)
         print(phone)
@@ -86,6 +83,7 @@ class ListViewModel:NSObject{
         
         
     }
+    //Update data
     func updateData(user:User){
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "User")
         do{
